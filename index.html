@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#FFFFFF">
 <title>Sofa, Carpet &amp; Rug Cleaning in Miami | D&amp;A Touch</title>
-<meta name="description" content="Professional upholstery, carpet, rug and mattress cleaning at your home in Miami. Pet-safe, dry in hours, prices from $xxx. Get a free quote on WhatsApp in minutes.">
+<meta name="description" content="Professional upholstery, carpet, rug and mattress cleaning at your home in Miami. Pet-safe, dry in hours, prices from $65. Get a free quote on WhatsApp in minutes.">
 <meta property="og:title" content="D&amp;A Touch — Upholstery &amp; Carpet Cleaning in Miami">
 <meta property="og:image" content="assets/hero.jpg">
 
@@ -27,15 +27,19 @@ window.LANDING_CONFIG = {
   GOOGLE_REVIEWS_COUNT: null,            // например 87
   GOOGLE_REVIEWS_URL: '',                // ссылка на профиль в Google
 
-  // Стартовые цены — заменить "xxx"
+  // Стартовые цены (из прайса клиента).
+  // sizes — варианты по размеру: строка раскрывается по нажатию, «from» считается автоматически.
+  // from:null — цены нет, показывается «Free quote».
   ITEMS: [
-    { name:'Sofa',                note:'2–3 seats',            from:'xxx', icon:'sofa' },
-    { name:'Sectional',           note:'L- or U-shape',        from:'xxx', icon:'sectional' },
-    { name:'Armchair / recliner', note:'Per piece',            from:'xxx', icon:'chair' },
-    { name:'Dining chairs',       note:'Per chair',            from:'xxx', icon:'chair' },
-    { name:'Mattress',            note:'Any size, both sides', from:'xxx', icon:'mattress' },
-    { name:'Carpet',              note:'Per room',             from:'xxx', icon:'carpet' },
-    { name:'Area rug',            note:'Wool & synthetic',     from:'xxx', icon:'rug' }
+    { name:'Sofa',          note:'3 to 7 seats',             icon:'sofa',
+      sizes:[ ['3 seats',175], ['4 seats',190], ['5 seats',200], ['6 seats',230], ['7 seats',250] ] },
+    { name:'Sectional',     note:'L- or U-shape · 8–10 sections', from:375, icon:'sectional' },
+    { name:'Area rug',      note:'Wool or synthetic',        icon:'rug',
+      sizes:[ ['5 × 7 ft',70], ['8 × 10 ft',100], ['9 × 12 ft',115], ['12 × 14 ft',129] ] },
+    { name:'Mattress',      note:'Queen size',               from:80,  icon:'mattress' },
+    { name:'Armchair',      note:'Per piece',                from:65,  icon:'chair' },
+    { name:'Dining chairs', note:'Set of 6 · package price', from:200, icon:'chair' },
+    { name:'Staircase',     note:'Priced from a photo',      from:null, icon:'stairs' }
   ],
 
   // Реальные отзывы клиентов (из Google / Yelp / Facebook). Пока массив пуст — секция скрыта.
@@ -168,8 +172,8 @@ section{padding:60px 0;scroll-margin-top:64px}
 
 /* prices */
 .plist{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--sh-1);overflow:hidden}
-.prow{display:flex;align-items:center;gap:14px;padding:15px 18px;border-top:1px solid var(--line)}
-.prow:first-child{border-top:0}
+.plist > * + *{border-top:1px solid var(--line)}
+.prow{display:flex;align-items:center;gap:14px;padding:15px 18px}
 .pico{width:46px;height:46px;border-radius:14px;background:var(--teal-soft);display:grid;place-items:center}
 .pico svg{width:24px;height:24px;color:var(--teal)}
 .ptxt{flex:1;min-width:0}
@@ -178,6 +182,19 @@ section{padding:60px 0;scroll-margin-top:64px}
 .pprice{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1}
 .pprice span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
 .pprice b{font-family:var(--serif);font-size:23px;font-weight:600;color:var(--teal)}
+.pprice b.q{font-family:var(--sans);font-size:15px;font-weight:700;padding-top:2px}
+.chev{width:26px;height:26px;border-radius:50%;background:var(--sand);display:grid;place-items:center;flex:none;transition:transform .25s,background .2s;color:var(--ink-2)}
+.chev svg{width:14px;height:14px}
+.chev--sp{background:none}
+.pd summary{list-style:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.pd summary::-webkit-details-marker{display:none}
+.pd summary:hover .chev{background:var(--teal-soft);color:var(--teal)}
+.pd[open] .chev{transform:rotate(180deg);background:var(--teal-soft);color:var(--teal)}
+.pd[open] summary{background:#FAFCFF}
+.psizes{list-style:none;margin:0 18px 0 78px;padding:0 0 12px}
+.psizes li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:9px 0;border-top:1px dashed var(--line);font-size:15px;color:var(--ink-2)}
+.psizes li:first-child{border-top:0}
+.psizes b{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--ink)}
 .pfoot{padding:20px 18px;background:linear-gradient(135deg,var(--teal-soft),#F1F6F4);display:flex;flex-direction:column;gap:12px}
 
 /* before / after */
@@ -258,6 +275,27 @@ section{padding:60px 0;scroll-margin-top:64px}
 
 footer{padding:32px 0 28px;font-size:14px;color:var(--muted)}
 footer .wrap{display:flex;flex-direction:column;gap:10px}
+.flink{font-size:14px;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;padding:6px 0}
+.flink:hover{color:var(--teal)}
+
+/* modal */
+html:has(dialog[open]){overflow:hidden}
+.modal{border:0;padding:0;margin:auto;width:calc(100% - 32px);max-width:560px;max-height:82vh;border-radius:var(--r-xl);background:var(--surface);color:var(--ink);box-shadow:var(--sh-2)}
+.modal[open]{display:flex;flex-direction:column;animation:mIn .25s cubic-bezier(.2,.8,.2,1)}
+.modal::backdrop{background:rgba(11,27,51,.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+@keyframes mIn{from{opacity:0;transform:translateY(16px)}}
+.m-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px 14px;border-bottom:1px solid var(--line)}
+.m-head h2{font-family:var(--serif);font-weight:800;font-size:21px;letter-spacing:-.02em}
+.m-x{width:40px;height:40px;border-radius:50%;background:var(--sand);display:grid;place-items:center;flex:none}
+.m-x svg{width:16px;height:16px;transform:rotate(45deg)}
+.m-body{overflow-y:auto;padding:6px 20px 22px;-webkit-overflow-scrolling:touch}
+.m-body h3{font-size:15px;font-weight:700;margin-top:16px}
+.m-body p{font-size:15px;line-height:1.55;color:var(--ink-2);margin-top:4px}
+.m-body .upd{font-size:13px;color:var(--muted);margin-top:18px}
+@media (max-width:899px){
+  .modal{width:100%;max-width:100%;margin:auto 0 0;border-radius:22px 22px 0 0;max-height:88vh;padding-bottom:env(safe-area-inset-bottom)}
+  @keyframes mIn{from{transform:translateY(100%)}}
+}
 
 /* sticky bar */
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px var(--g) calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
@@ -311,6 +349,8 @@ footer .wrap{display:flex;flex-direction:column;gap:10px}
   <symbol id="carpet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="1"/><path d="M7 10h10M7 14h10"/></g></symbol>
   <symbol id="rug" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="16" rx="1"/><rect x="9" y="8" width="6" height="8" rx="1"/><path d="M8 4V2M12 4V2M16 4V2M8 22v-2M12 22v-2M16 22v-2"/></g></symbol>
   <symbol id="mattress" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="9" rx="2"/><path d="M2 12.5h20M5 17v2M19 17v2"/></g></symbol>
+  <symbol id="stairs" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h5v-4h4v-4h4V8h5"/><path d="M21 8v12H3"/></g></symbol>
+  <symbol id="chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
 <div class="ribbon" aria-hidden="true">
@@ -505,7 +545,7 @@ footer .wrap{display:flex;flex-direction:column;gap:10px}
     <a class="brand" href="#top"><span class="mark">D&amp;A</span><span class="brand-name">D&amp;A Touch<small>MIAMI, FL</small></span></a>
     <span>Upholstery, carpet, rug &amp; mattress cleaning · Miami-Dade County, FL · License #[XXXX]</span>
     <span><a class="js-call" href="#"><span class="js-phone">(413) 345-3811</span></a></span>
-    <span><a href="#">Privacy policy</a> · <a href="#">Terms</a> · © 2026 D&amp;A Touch</span>
+    <span><button class="flink" type="button" data-modal="m-privacy">Privacy policy</button> · <button class="flink" type="button" data-modal="m-terms">Terms of service</button> · © 2026 D&amp;A Touch</span>
   </div>
 </footer>
 
@@ -515,6 +555,40 @@ footer .wrap{display:flex;flex-direction:column;gap:10px}
     <a class="btn btn--main js-lead" data-ch="whatsapp" data-src="sticky" href="#"><span class="wa-dot"><svg><use href="#wa"/></svg></span>Get my free quote</a>
   </div>
 </div>
+
+<dialog class="modal" id="m-privacy" aria-labelledby="m-privacy-t">
+  <div class="m-head"><h2 id="m-privacy-t">Privacy policy</h2><form method="dialog"><button class="m-x" aria-label="Close"><svg><use href="#plus"/></svg></button></form></div>
+  <div class="m-body">
+    <h3>What we collect</h3>
+    <p>Only what you send us to get a quote or book: your name, phone number, ZIP code or address, and photos of the items to be cleaned.</p>
+    <h3>How we use it</h3>
+    <p>To prepare your price, schedule the visit, do the job and follow up on it. We don’t send marketing messages unless you ask for them.</p>
+    <h3>Ads &amp; cookies</h3>
+    <p>This site uses the Meta Pixel to measure how our ads perform. It may set cookies in your browser. You can block them in your browser settings or in your Facebook ad preferences.</p>
+    <h3>Sharing</h3>
+    <p>We never sell your information. It is shared only with services we need to run the business, such as messaging and payment providers.</p>
+    <h3>Your choices</h3>
+    <p>Want your information deleted? Call or text <a class="js-call" href="#"><b class="js-phone">(413) 345-3811</b></a> and we’ll remove it.</p>
+    <p class="upd">Last updated: October 2026</p>
+  </div>
+</dialog>
+
+<dialog class="modal" id="m-terms" aria-labelledby="m-terms-t">
+  <div class="m-head"><h2 id="m-terms-t">Terms of service</h2><form method="dialog"><button class="m-x" aria-label="Close"><svg><use href="#plus"/></svg></button></form></div>
+  <div class="m-body">
+    <h3>Prices</h3>
+    <p>Prices on this site are starting prices. We confirm your exact price from photos before the visit. If the size or condition on site is different, we’ll tell you the new price before we start — never after.</p>
+    <h3>Payment</h3>
+    <p>No deposit. You pay after the job by card, Apple Pay, Zelle or cash.</p>
+    <h3>Results</h3>
+    <p>We test every fabric first. Most stains come out, but old, set-in or dye stains may only lighten. We may decline items that can’t be cleaned safely.</p>
+    <h3>Re-clean guarantee</h3>
+    <p>If something isn’t right, tell us within 48 hours and we’ll come back to re-clean it at no charge.</p>
+    <h3>Your visit</h3>
+    <p>An adult needs to give us access. Please clear small and fragile items. If you need to reschedule, let us know as early as you can — ideally 24 hours ahead.</p>
+    <p class="upd">Last updated: October 2026</p>
+  </div>
+</dialog>
 
 <script>
 (function(){
@@ -534,13 +608,34 @@ footer .wrap{display:flex;flex-direction:column;gap:10px}
   }
 
   /* ---------- Price list ---------- */
+  var chev = '<span class="chev"><svg><use href="#chev"/></svg></span>';
   document.getElementById('plist').innerHTML = C.ITEMS.map(function(it){
-    return '<div class="prow"><span class="pico"><svg><use href="#'+it.icon+'"/></svg></span>'+
+    var min = it.sizes ? Math.min.apply(null, it.sizes.map(function(x){ return x[1]; })) : it.from;
+    var price = (min != null)
+      ? '<span>from</span><b>$'+esc(min)+'</b>'
+      : '<span>price</span><b class="q">Free quote</b>';
+    var head = '<span class="pico"><svg><use href="#'+it.icon+'"/></svg></span>'+
       '<div class="ptxt"><div class="pname">'+esc(it.name)+'</div><div class="pnote">'+esc(it.note)+'</div></div>'+
-      '<div class="pprice"><span>from</span><b>$'+esc(it.from)+'</b></div></div>';
+      '<div class="pprice">'+price+'</div>';
+    if (it.sizes) {
+      return '<details class="pd"><summary class="prow">'+head+chev+'</summary><ul class="psizes">'+
+        it.sizes.map(function(x){ return '<li><span>'+esc(x[0])+'</span><b>$'+esc(x[1])+'</b></li>'; }).join('')+'</ul></details>';
+    }
+    return '<div class="prow">'+head+'<span class="chev chev--sp" aria-hidden="true"></span></div>';
   }).join('') +
   '<div class="pfoot"><a class="btn btn--main js-lead" data-ch="whatsapp" data-src="prices" href="#"><span class="wa-dot"><svg><use href="#wa"/></svg></span>Get my exact price</a>'+
   '<p class="xs muted center">Send a photo on WhatsApp — we reply in minutes.</p></div>';
+
+  /* ---------- Policy pop-ups ---------- */
+  document.querySelectorAll('[data-modal]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var d = document.getElementById(btn.dataset.modal);
+      if (d && d.showModal) d.showModal(); else if (d) d.setAttribute('open', '');
+    });
+  });
+  document.querySelectorAll('dialog.modal').forEach(function(d){
+    d.addEventListener('click', function(e){ if (e.target === d) d.close(); });   // клик по фону закрывает
+  });
 
   /* ---------- Optional trust bits ---------- */
   if (C.SPANISH) document.getElementById('es-badge').hidden = false;
